@@ -52,6 +52,7 @@ The reason for creating this ruby gem is to convert Excel files to json files. W
 # Todo
 
 * Add support for properties in arrays
+* Add support for colision in hash. Eg.: properties.age and properties.1 key
 
 # License
 
