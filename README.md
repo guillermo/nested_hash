@@ -45,6 +45,13 @@ my_new_hash # => {"name"=>"guillermo", "properties"=>{"age"=>29, "sex"=>"male"},
 
 NestedHash inherits from *Hash*, so you can use it as a normal hash.
 
+
+# Installation
+
+```shell
+$ gem install nested_hash
+```
+
 # Motivations
 
 The reason for creating this ruby gem is to convert Excel files to json files. With the rubygems roo you already can get the rows into a one level hash (colum title as a key). This complement help to create more difficult structures with the same excel file.
