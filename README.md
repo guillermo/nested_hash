@@ -13,7 +13,7 @@ NestedHash is a Hash converter. It will created a simple, key encoded hash, in t
 }
 ```
 
-into the hash
+will be converted into the hash
 
 ```ruby
 {
@@ -42,6 +42,8 @@ my_normal_hash = {
 my_new_hash = NestedHash.new(my_normal_hash)
 my_new_hash # => {"name"=>"guillermo", "properties"=>{"age"=>29, "sex"=>"male"}, "parents"=>["ramon", "gloria"]}
 ```
+
+NestedHash inherits from *Hash*, so you can use it as a normal hash.
 
 # Motivations
 
