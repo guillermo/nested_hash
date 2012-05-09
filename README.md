@@ -56,10 +56,6 @@ $ gem install nested_hash
 
 The reason for creating this ruby gem is to convert Excel files to json files. With the rubygems roo you already can get the rows into a one level hash (colum title as a key). This complement help to create more difficult structures with the same excel file.
 
-# Todo
-
-* Add support for properties in arrays
-* Add support for colision in hash. Eg.: properties.age and properties.1 key
 
 # License
 
