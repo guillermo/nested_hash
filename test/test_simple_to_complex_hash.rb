@@ -8,10 +8,6 @@ class NestedHashTest < Test::Unit::TestCase
     nested_hash.is_a?(Hash)
   end
 
-  def test_true
-    assert true
-  end
-
   def test_subitem_conversion
     initial = { "properties.age" => 3 }
     final = { "properties" => { "age" => 3 }}
