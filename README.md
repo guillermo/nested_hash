@@ -1,6 +1,5 @@
 # NestedHash
 
-
 NestedHash is a Hash converter. It will created a simple, key encoded hash, in to a nested hash. For example, the hash:
 
 ```ruby
