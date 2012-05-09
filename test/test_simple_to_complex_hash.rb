@@ -31,4 +31,13 @@ class NestedHashTest < Test::Unit::TestCase
     assert_equal ['child'], hash.keys
     assert_equal ['pepe','juan'], hash["child"]
   end
+
+  def test_hash_in_array
+    initial = { "game.1.name" => 'Guillermo',
+      "game.1.lives" => 3,
+      "game.2.lives" => 5 }
+    hash = NestedHash.new(initial)
+    assert_equal( {"name" => "Guillermo", "lives" => 3} , hash["game"][0], 'should merge elements')
+    assert_equal( {"lives" => 5}, hash["game"][1])
+  end
 end

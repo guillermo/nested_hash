@@ -12,9 +12,21 @@ class NestedHash < Hash
         copy(key,v)
       end
     end
+    post_process
   end
 
   protected
+
+  def post_process
+    compact_arrays
+  end
+
+  def compact_arrays(element = self)
+    element.each do |item|
+      item.compact! if item.is_a?(Array)
+      compact_arrays(item) if item.is_a?(Array) || item.is_a?(Hash)
+    end
+  end
 
   def copy_invalid_keys?
     true
@@ -51,6 +63,7 @@ class NestedHash < Hash
     top = keys.inject(self) do |memo,key|
       if is_for_array?(key)
         memo[previous] ||= []
+        key = key.to_i
       else
         memo[previous] ||= {}
       end
