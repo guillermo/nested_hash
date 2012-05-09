@@ -77,6 +77,25 @@ class NestedHash < Hash
     else
       top[previous] = value
     end
+  rescue => e
+    handle_exception(e, key, value)
+  end
+
+  def handle_exception(e, key, value)
+    log_exception(e, key, value) if log_exceptions?
+    raise e unless continue_on_exceptions?
+  end
+
+  def log_exception(e)
+    $stderr.puts "Problem procesing the pair \"#{key}\" => \"#{value}\""
+  end
+
+  def continue_on_exceptions?
+    true
+  end
+
+  def log_exceptions?
+    true
   end
 
   def is_for_array?(key)
