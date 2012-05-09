@@ -1,0 +1,13 @@
+
+2012-05-09 Guillermo Alvarez Fernandez <guillermo@cientifico.net>
+
+	* nested_hash.rb (process_nested): Added the ability of have hashs inside of
+	arrays.
+
+	* nested_hash.rb (post_process): Added the ability of post_process the final
+	hash.
+
+	* nested_hash.rb (log_exception): Create a exception handler, being able to
+	generate errors on stderr and continue with more keys.
+
+
