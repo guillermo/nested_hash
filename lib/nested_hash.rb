@@ -45,13 +45,13 @@ class NestedHash < Hash
   end
 
   def process(key,value)
+    value = sanitize_value(value)
     if key =~ /\./
       process_nested(key,value)
     else
       self[key] = value
     end
   end
-
 
   def sanitize_value(v)
     v
