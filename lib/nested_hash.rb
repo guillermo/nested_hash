@@ -4,7 +4,7 @@ class NestedHash < Hash
 
   def initialize(hash = {})
     hash.each do |key,v|
-      key = sanitize_key(key)
+      key = sanitize_long_key(key)
 
       if is_valid_key?(key)
         process(key,v)
@@ -30,6 +30,10 @@ class NestedHash < Hash
 
   def copy_invalid_keys?
     true
+  end
+
+  def sanitize_long_key(key)
+    key
   end
 
   def sanitize_key(key)
@@ -59,12 +63,13 @@ class NestedHash < Hash
 
   def process_nested(key, value)
     keys = key.split(".")
-    previous = keys.shift
+    previous = sanitize_key(keys.shift)
     top = keys.inject(self) do |memo,key|
       if is_for_array?(key)
         memo[previous] ||= []
         key = key.to_i
       else
+        key = sanitize_key(key)
         memo[previous] ||= {}
       end
       a = memo[previous]

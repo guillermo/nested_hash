@@ -1,4 +1,9 @@
 
+2012-05-23 Guillermo Alvarez Fernandez <guillermo@cientifico.net>
+
+  * nested_hash.rb (sanitize_long_key): Added the ability of sanitize the
+	single key, or the initial key of the hash.
+
 2012-05-16 Guillermo Alvarez Fernandez <guillermo@cientifico.net>
 
 	* nested_hash.rb (process): Now the values are sanitized correctly
