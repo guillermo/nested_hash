@@ -1,10 +1,10 @@
+2012-05-23  Guillermo Alvarez <guillermo@cientifico.net>
 
-2012-05-23 Guillermo Alvarez Fernandez <guillermo@cientifico.net>
-
-  * nested_hash.rb (sanitize_long_key): Added the ability of sanitize the
+	* nested_hash.rb (sanitize_long_key): Added the ability of sanitize the
 	single key, or the initial key of the hash.
-
-  * nested_hash.rb (process_nested): Now the index of the array are respected.
+	* nested_hash.rb (process_nested): Now the index of the array are respected.
+	* nested_hash.rb (log_exception): [bug] log_exception was marked as a
+	funcion with only one argument. Fixed to include all the arguments.
 
 2012-05-16 Guillermo Alvarez Fernandez <guillermo@cientifico.net>
 

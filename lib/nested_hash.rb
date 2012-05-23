@@ -87,7 +87,7 @@ class NestedHash < Hash
     raise e unless continue_on_exceptions?
   end
 
-  def log_exception(e)
+  def log_exception(e, key, value)
     $stderr.puts "Problem procesing the pair \"#{key}\" => \"#{value}\""
   end
 
