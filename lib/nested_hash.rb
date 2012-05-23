@@ -77,11 +77,7 @@ class NestedHash < Hash
       a
     end
 
-    if top.is_a?(Array)
-      top << value
-    else
-      top[previous] = value
-    end
+    top[previous] = value
   rescue => e
     handle_exception(e, key, value)
   end

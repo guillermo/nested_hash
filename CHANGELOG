@@ -4,6 +4,8 @@
   * nested_hash.rb (sanitize_long_key): Added the ability of sanitize the
 	single key, or the initial key of the hash.
 
+  * nested_hash.rb (process_nested): Now the index of the array are respected.
+
 2012-05-16 Guillermo Alvarez Fernandez <guillermo@cientifico.net>
 
 	* nested_hash.rb (process): Now the values are sanitized correctly
