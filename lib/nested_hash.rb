@@ -53,7 +53,7 @@ class NestedHash < Hash
     if key =~ /\./
       process_nested(key,value)
     else
-      self[key] = value
+      self[sanitize_key(key)] = value
     end
   end
 

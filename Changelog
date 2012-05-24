@@ -1,3 +1,8 @@
+2012-05-24  Guillermo Alvarez <guillermo@cientifico.net>
+
+	* nested_hash.rb (process): [bug] When there is only one level, the key was
+	not sanitized. This is fixed.
+
 2012-05-23  Guillermo Alvarez <guillermo@cientifico.net>
 
 	* nested_hash.rb (sanitize_long_key): Added the ability of sanitize the
