@@ -52,4 +52,13 @@ class NestedHashTest < Test::Unit::TestCase
    nh.compact_arrays!
    assert_equal({"person"=>[{"name"=>"guillermo"}]}, nh)
   end
+
+  def test_delete_method
+   nh = NestedHash.new()
+   nh.set("person.2.name", "guillermo")
+   nh.delete("person.2.name")
+   assert_equal({"person"=>[nil,nil,{}]}, nh)
+   nh.compact_arrays!
+   assert_equal({"person"=>[{}]}, nh)
+  end
 end

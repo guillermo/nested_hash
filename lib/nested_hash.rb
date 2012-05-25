@@ -26,8 +26,12 @@ class NestedHash < Hash
     end
   end
 
+  def delete(key)
+    look_for(key,nil, :delete)
+  end
 
-  def look_for(key,value, write = true)
+
+  def look_for(key,value, op  = :set)
     keys = key.split(".").map{|k| sanitize_key(k)}
 
     previous = keys.shift
@@ -38,13 +42,20 @@ class NestedHash < Hash
       memo
     end)
 
-    write ? top[previous] = value : top[previous]
+    case op
+    when :set
+      top[previous] = value
+    when :get
+      top[previous]
+    when :delete
+      top.delete(previous)
+    end
   rescue => e
     handle_exception(e, key, value)
   end
 
   def get(key)
-    look_for(key,nil, false)
+    look_for(key,nil, :get)
   end
 
   protected
