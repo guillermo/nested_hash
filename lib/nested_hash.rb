@@ -11,15 +11,12 @@ class NestedHash < Hash
 
   def set(key,value)
     key = sanitize_long_key(key)
+
     if is_valid_key?(key)
-      process(key,value)
+      look_for(key,value)
     elsif copy_invalid_keys?
       copy(key,value)
     end
-  end
-
-  def get(key)
-    key = sanitize_long_key(key)
   end
 
   def compact_arrays!(element = self)
@@ -30,7 +27,7 @@ class NestedHash < Hash
   end
 
 
-  def set(key,value, write = true)
+  def look_for(key,value, write = true)
     keys = key.split(".").map{|k| sanitize_key(k)}
 
     previous = keys.shift
@@ -47,7 +44,7 @@ class NestedHash < Hash
   end
 
   def get(key)
-    set(key,nil, false)
+    look_for(key,nil, false)
   end
 
   protected
