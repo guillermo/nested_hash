@@ -3,30 +3,59 @@ require "nested_hash/version"
 class NestedHash < Hash
 
   def initialize(hash = {})
-    hash.each do |key,v|
-      key = sanitize_long_key(key)
-
-      if is_valid_key?(key)
-        process(key,v)
-      elsif copy_invalid_keys?
-        copy(key,v)
-      end
+    hash.each do |key,value|
+      set(key,value)
     end
     post_process
+  end
+
+  def set(key,value)
+    key = sanitize_long_key(key)
+    if is_valid_key?(key)
+      process(key,value)
+    elsif copy_invalid_keys?
+      copy(key,value)
+    end
+  end
+
+  def get(key)
+    key = sanitize_long_key(key)
+  end
+
+  def compact_arrays!(element = self)
+    element.each do |item|
+      item.compact! if item.is_a?(Array)
+      compact_arrays!(item) if item.is_a?(Array) || item.is_a?(Hash)
+    end
+  end
+
+
+  def set(key,value, write = true)
+    keys = key.split(".").map{|k| sanitize_key(k)}
+
+    previous = keys.shift
+    top = (keys.inject(self) do |memo,key|
+      memo[previous] ||= ( is_for_array?(key) ? [] : {} )
+      memo = memo[previous]
+      previous = key
+      memo
+    end)
+
+    write ? top[previous] = value : top[previous]
+  rescue => e
+    handle_exception(e, key, value)
+  end
+
+  def get(key)
+    set(key,nil, false)
   end
 
   protected
 
   def post_process
-    compact_arrays
+    compact_arrays!
   end
 
-  def compact_arrays(element = self)
-    element.each do |item|
-      item.compact! if item.is_a?(Array)
-      compact_arrays(item) if item.is_a?(Array) || item.is_a?(Hash)
-    end
-  end
 
   def copy_invalid_keys?
     true
@@ -37,7 +66,7 @@ class NestedHash < Hash
   end
 
   def sanitize_key(key)
-    key
+    ( key =~ /^\d+$/ ) ? key.to_i : key
   end
 
   def is_valid_key?(key)
@@ -61,27 +90,6 @@ class NestedHash < Hash
     v
   end
 
-  def process_nested(key, value)
-    keys = key.split(".")
-    previous = sanitize_key(keys.shift)
-    top = keys.inject(self) do |memo,key|
-      if is_for_array?(key)
-        memo[previous] ||= []
-        key = key.to_i
-      else
-        key = sanitize_key(key)
-        memo[previous] ||= {}
-      end
-      a = memo[previous]
-      previous = key
-      a
-    end
-
-    top[previous] = value
-  rescue => e
-    handle_exception(e, key, value)
-  end
-
   def handle_exception(e, key, value)
     log_exception(e, key, value) if log_exceptions?
     raise e unless continue_on_exceptions?
@@ -100,7 +108,7 @@ class NestedHash < Hash
   end
 
   def is_for_array?(key)
-    key =~ /\A\d+\z/
+    key.is_a?(Numeric)
   end
 
 

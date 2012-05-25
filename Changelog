@@ -1,3 +1,7 @@
+2012-05-25  Guillermo Alvarez <guillermo@cientifico.net>
+
+	* nested_hash.rb (get/set): Implement get and set methods.
+
 2012-05-24  Guillermo Alvarez <guillermo@cientifico.net>
 
 	* nested_hash.rb (process): [bug] When there is only one level, the key was

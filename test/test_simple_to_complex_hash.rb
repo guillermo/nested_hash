@@ -36,4 +36,20 @@ class NestedHashTest < Test::Unit::TestCase
     assert_equal( {"name" => "Guillermo", "lives" => 3} , hash["game"][0], 'should merge elements')
     assert_equal( {"lives" => 5}, hash["game"][1])
   end
+
+
+  def test_set_and_get
+   nh = NestedHash.new()
+   nh.set("person.2.name", "guillermo")
+
+   assert_equal({"person"=>[nil, nil, {"name"=>"guillermo"}]}, nh)
+  end
+
+  def test_compact_array
+   nh = NestedHash.new()
+   nh.set("person.2.name", "guillermo")
+
+   nh.compact_arrays!
+   assert_equal({"person"=>[{"name"=>"guillermo"}]}, nh)
+  end
 end
